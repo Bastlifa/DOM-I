@@ -59,6 +59,17 @@ document.querySelector("#cta-img").src = siteContent["cta"]["img-src"];
 let ctaH1 = document.querySelector(".cta-text h1");
 ctaH1.innerHTML = siteContent["cta"]["h1"].replace(/\s/g, '<br> ');
 
-
 document.querySelector(".cta-text button").textContent = siteContent["cta"]["button"];
 
+// H4 headers. Did this stupidly. Will do p's similarly.
+let aMainH4 = Array.from(document.querySelectorAll(".main-content h4"));
+let aH4keys = ["features-h4", "about-h4", "services-h4", "product-h4", "vision-h4"];
+aMainH4.forEach((elem, index) => elem.textContent = siteContent["main-content"][aH4keys[index]]);
+
+
+// Correction: did p even more stupidly
+let aMainP = Array.from(document.querySelectorAll(".main-content p"));
+let aPkeys = aH4keys.map(elem => elem.slice(0, elem.indexOf('-') + 1) + "content");
+aMainP.forEach((elem, index) => elem.textContent = siteContent["main-content"][aPkeys[index]]);
+
+//contact stuff

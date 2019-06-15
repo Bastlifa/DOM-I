@@ -41,7 +41,9 @@ const siteContent = {
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
 
-document.querySelector("#middle-img").src = siteContent["main-content"]["middle-img-src"];
+// Project Start
+
+// Tasks 1 & 2 combined. I didn't make selectors for everything, because why bother when you can set directly?
 
 // header stuff
 let headerEl = document.querySelector("header");
@@ -61,15 +63,43 @@ ctaH1.innerHTML = siteContent["cta"]["h1"].replace(/\s/g, '<br> ');
 
 document.querySelector(".cta-text button").textContent = siteContent["cta"]["button"];
 
+// Main Content
 // H4 headers. Did this stupidly. Will do p's similarly.
 let aMainH4 = Array.from(document.querySelectorAll(".main-content h4"));
 let aH4keys = ["features-h4", "about-h4", "services-h4", "product-h4", "vision-h4"];
 aMainH4.forEach((elem, index) => elem.textContent = siteContent["main-content"][aH4keys[index]]);
 
+// middle img
+document.querySelector("#middle-img").src = siteContent["main-content"]["middle-img-src"];
 
 // Correction: did p even more stupidly
 let aMainP = Array.from(document.querySelectorAll(".main-content p"));
 let aPkeys = aH4keys.map(elem => elem.slice(0, elem.indexOf('-') + 1) + "content");
 aMainP.forEach((elem, index) => elem.textContent = siteContent["main-content"][aPkeys[index]]);
 
-//contact stuff
+// contact stuff
+let contactH4 = document.querySelector(".contact h4");
+contactH4.textContent = siteContent["contact"]["contact-h4"];
+
+let aContactP = Array.from(document.querySelectorAll(".contact p"));
+let aContactPkeys = ["address", "phone", "email"];
+aContactP.forEach((elem, index) => elem.textContent = siteContent["contact"][aContactPkeys[index]]);
+aContactP[0].innerHTML = aContactP[0].innerHTML.replace("Street", "Street<br>"); // horrible.
+
+// footer
+let footerPEl = document.querySelector("footer p");
+footerPEl.textContent = siteContent["footer"]["copyright"];
+
+
+// Task 3
+
+navA.forEach(elem => elem.style.color = "green");
+let appendA = document.createElement("a");
+appendA.textContent = "Append";
+let prependA = document.createElement("a")
+prependA.textContent = "Prepend";
+navEl.appendChild(appendA);
+navEl.prepend(prependA);
+// Appended and Prepended items not colored green. Could make them green, but it's not clear whether to or not.
+
+// Stretch Goals

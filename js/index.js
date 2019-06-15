@@ -40,3 +40,25 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+document.querySelector("#middle-img").src = siteContent["main-content"]["middle-img-src"];
+
+// header stuff
+let headerEl = document.querySelector("header");
+
+// nav stuff
+let navEl = document.querySelector("nav");
+let navA = Array.from(navEl.children);
+navA.forEach((elem, index) => {elem.textContent = siteContent["nav"][`nav-item-${index + 1}`]});
+//easy checking of original
+navA[3].href = "original.html";
+
+
+// cta PITA. Using .innerHTML to get the code to match original. Couldn't figure way using .textContent
+document.querySelector("#cta-img").src = siteContent["cta"]["img-src"];
+let ctaH1 = document.querySelector(".cta-text h1");
+ctaH1.innerHTML = siteContent["cta"]["h1"].replace(/\s/g, '<br> ');
+
+
+document.querySelector(".cta-text button").textContent = siteContent["cta"]["button"];
+

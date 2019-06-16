@@ -64,6 +64,9 @@ let aContactP = Array.from(document.querySelectorAll(".contact p"));
 // footer
 let footerPEl = document.querySelector("footer p");
 
+// for setPageHtml with reverse and added nav a elements
+let revToggle = 0;
+
 /********** End Task 1 ********************/
 
 /********** Task 2 Update HTML ************/
@@ -101,6 +104,7 @@ function setPageHtml()
   aContactP.forEach((elem, index) => elem.textContent = siteContent["contact"][aContactPkeys[index]]);
   aContactP[0].style.whiteSpace = "pre-line";
   aContactP[0].textContent = aContactP[0].textContent.replace("Street", "Street\n");
+  // reverse case for stretch 2 below
   aContactP[0].textContent = aContactP[0].textContent.replace(",erehwemoS", ",erehwemoS\n")
   // footer
   footerPEl.textContent = siteContent["footer"]["copyright"];
@@ -109,13 +113,27 @@ function setPageHtml()
   /**************Task 3: Add new content  *************/
 
   navA.forEach(elem => elem.style.color = "green");
+  
   let appendA = document.createElement("a");
-  appendA.textContent = "Append";
+  appendA.href = "stretch-assignment/digital_timer/index.html";
+  
   let prependA = document.createElement("a")
-  prependA.textContent = "Prepend";
+  prependA.href = "original.html";
+
+  if (!revToggle)
+  {
+    appendA.textContent = "Timer";
+    prependA.textContent = "Original";
+  }
+  else
+  {
+    appendA.textContent = "Timer".split("").reverse().join("");
+    prependA.textContent = "Original".split("").reverse().join("");
+  }
+
   navEl.appendChild(appendA);
   navEl.prepend(prependA);
-  // Appended and Prepended items not colored green. Could make them green, but it's not clear whether to or not.
+  
 
   /********************End Task 3  ********************/
 
@@ -132,6 +150,9 @@ setPageHtml() //completes task 2, 3, stretch 1
 
 function reverseEachString()
 {
+  //toggle
+  revToggle ? revToggle = 0 : revToggle = 1;
+
   //nav
   Object.keys(siteContent["nav"]).filter(elem => elem.includes("nav-item"))
   .forEach(elem => siteContent["nav"][elem] = siteContent["nav"][elem].split("").reverse().join(""));

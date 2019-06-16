@@ -43,66 +43,121 @@ logo.setAttribute('src', siteContent["nav"]["img-src"])
 
 // Project Start
 
-// Tasks 1 & 2 combined. I didn't make selectors for everything, because why bother when you can set directly?
+/********** Tasks 1: set selectors **********/
 
-// header stuff
-let headerEl = document.querySelector("header");
-
-// nav stuff
+//nav
 let navEl = document.querySelector("nav");
 let navA = Array.from(navEl.children);
-navA.forEach((elem, index) => {elem.textContent = siteContent["nav"][`nav-item-${index + 1}`]});
-//easy checking of original
-navA[3].href = "original.html";
 
-
-// cta PITA. Using .innerHTML to get the code to match original. Couldn't figure way using .textContent
-document.querySelector("#cta-img").src = siteContent["cta"]["img-src"];
+//cta
 let ctaH1 = document.querySelector(".cta-text h1");
-ctaH1.textContent = siteContent["cta"]["h1"].replace(/\s/g, '\n');
-ctaH1.style.whiteSpace = "pre-line";
+let getStartedBtn = document.querySelector(".cta-text button");
 
-document.querySelector(".cta-text button").textContent = siteContent["cta"]["button"];
-
-// Main Content
-// H4 headers. Did this stupidly. Will do p's similarly.
+//main content
 let aMainH4 = Array.from(document.querySelectorAll(".main-content h4"));
-let aH4keys = ["features-h4", "about-h4", "services-h4", "product-h4", "vision-h4"];
-aMainH4.forEach((elem, index) => elem.textContent = siteContent["main-content"][aH4keys[index]]);
-
-// middle img
-document.querySelector("#middle-img").src = siteContent["main-content"]["middle-img-src"];
-
-// Correction: did p even more stupidly
 let aMainP = Array.from(document.querySelectorAll(".main-content p"));
-let aPkeys = aH4keys.map(elem => elem.slice(0, elem.indexOf('-') + 1) + "content");
-aMainP.forEach((elem, index) => elem.textContent = siteContent["main-content"][aPkeys[index]]);
 
-// contact stuff
+//contact stuff
 let contactH4 = document.querySelector(".contact h4");
-contactH4.textContent = siteContent["contact"]["contact-h4"];
-
 let aContactP = Array.from(document.querySelectorAll(".contact p"));
-let aContactPkeys = ["address", "phone", "email"];
-aContactP.forEach((elem, index) => elem.textContent = siteContent["contact"][aContactPkeys[index]]);
-// aContactP[0].innerHTML = aContactP[0].innerHTML.replace("Street", "Street<br>"); // horrible.
-aContactP[0].style.whiteSpace = "pre-line";
-aContactP[0].textContent = aContactP[0].textContent.replace("Street", "Street\n")
 
 // footer
 let footerPEl = document.querySelector("footer p");
-footerPEl.textContent = siteContent["footer"]["copyright"];
 
+/********** End Task 1 ********************/
 
-// Task 3
+/********** Task 2 Update HTML ************/
 
-navA.forEach(elem => elem.style.color = "green");
-let appendA = document.createElement("a");
-appendA.textContent = "Append";
-let prependA = document.createElement("a")
-prependA.textContent = "Prepend";
-navEl.appendChild(appendA);
-navEl.prepend(prependA);
-// Appended and Prepended items not colored green. Could make them green, but it's not clear whether to or not.
+//making function for ease of use with stretch 2 goal
 
-// Stretch Goals
+function setPageHtml()
+{
+  // nav stuff
+  navA.forEach((elem, index) => {elem.textContent = siteContent["nav"][`nav-item-${index + 1}`]});
+  
+  // cta stuff
+  document.querySelector("#cta-img").src = siteContent["cta"]["img-src"];
+  ctaH1.textContent = siteContent["cta"]["h1"].replace(/\s/g, '\n');
+  ctaH1.style.whiteSpace = "pre-line";
+  getStartedBtn.textContent = siteContent["cta"]["button"];
+  
+  // Main Content
+  // H4 headers. Did this stupidly. Will do p's similarly.
+  let aH4keys = ["features-h4", "about-h4", "services-h4", "product-h4", "vision-h4"];
+  aMainH4.forEach((elem, index) => elem.textContent = siteContent["main-content"][aH4keys[index]]);
+  
+  // middle img
+  document.querySelector("#middle-img").src = siteContent["main-content"]["middle-img-src"];
+  
+  // p
+  let aPkeys = aH4keys.map(elem => elem.slice(0, elem.indexOf('-') + 1) + "content");
+  aMainP.forEach((elem, index) => elem.textContent = siteContent["main-content"][aPkeys[index]]);
+  
+  // contact stuff
+  
+  contactH4.textContent = siteContent["contact"]["contact-h4"];
+  
+  let aContactPkeys = ["address", "phone", "email"];
+  aContactP.forEach((elem, index) => elem.textContent = siteContent["contact"][aContactPkeys[index]]);
+  aContactP[0].style.whiteSpace = "pre-line";
+  aContactP[0].textContent = aContactP[0].textContent.replace("Street", "Street\n");
+  aContactP[0].textContent = aContactP[0].textContent.replace(",erehwemoS", ",erehwemoS\n")
+  // footer
+  footerPEl.textContent = siteContent["footer"]["copyright"];
+  
+  
+  /**************Task 3: Add new content  *************/
+
+  navA.forEach(elem => elem.style.color = "green");
+  let appendA = document.createElement("a");
+  appendA.textContent = "Append";
+  let prependA = document.createElement("a")
+  prependA.textContent = "Prepend";
+  navEl.appendChild(appendA);
+  navEl.prepend(prependA);
+  // Appended and Prepended items not colored green. Could make them green, but it's not clear whether to or not.
+
+  /********************End Task 3  ********************/
+
+  /* Stretch Goal 1: updating append and prepend to be green. */
+
+  navA = Array.from(navEl.children);
+  navA.forEach(elem => elem.style.color = "green");
+
+}
+
+setPageHtml() //completes task 2, 3, stretch 1
+
+/* Stretch Goal 2 Make the "Get Started" button do something. I guess I'll reverse each string. */
+
+function reverseEachString()
+{
+  //nav
+  Object.keys(siteContent["nav"]).filter(elem => elem.includes("nav-item"))
+  .forEach(elem => siteContent["nav"][elem] = siteContent["nav"][elem].split("").reverse().join(""));
+
+  //cta
+  siteContent["cta"]["h1"] = siteContent["cta"]["h1"].split("").reverse().join("")
+  siteContent["cta"]["button"] = siteContent["cta"]["button"].split("").reverse().join("");
+
+  //main content
+  Object.keys(siteContent["main-content"]).filter(elem => !elem.includes("img"))
+  .forEach(elem => siteContent["main-content"][elem] = siteContent["main-content"][elem].split("").reverse().join(""));
+
+  //contact
+  Object.keys(siteContent["contact"])
+  .forEach(elem => siteContent["contact"][elem] = siteContent["contact"][elem].split("").reverse().join(""));
+
+  //footer
+  siteContent["footer"]["copyright"] = siteContent["footer"]["copyright"].split("").reverse().join("");
+}
+
+//make the button work
+
+getStartedBtn.addEventListener('click', function()
+{
+  reverseEachString();
+  setPageHtml();
+})
+
+//works, but strange behavior with nav a losing some padding each click.

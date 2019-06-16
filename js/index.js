@@ -59,7 +59,8 @@ navA[3].href = "original.html";
 // cta PITA. Using .innerHTML to get the code to match original. Couldn't figure way using .textContent
 document.querySelector("#cta-img").src = siteContent["cta"]["img-src"];
 let ctaH1 = document.querySelector(".cta-text h1");
-ctaH1.innerHTML = siteContent["cta"]["h1"].replace(/\s/g, '<br> ');
+ctaH1.textContent = siteContent["cta"]["h1"].replace(/\s/g, '\n');
+ctaH1.style.whiteSpace = "pre-line";
 
 document.querySelector(".cta-text button").textContent = siteContent["cta"]["button"];
 
@@ -84,7 +85,9 @@ contactH4.textContent = siteContent["contact"]["contact-h4"];
 let aContactP = Array.from(document.querySelectorAll(".contact p"));
 let aContactPkeys = ["address", "phone", "email"];
 aContactP.forEach((elem, index) => elem.textContent = siteContent["contact"][aContactPkeys[index]]);
-aContactP[0].innerHTML = aContactP[0].innerHTML.replace("Street", "Street<br>"); // horrible.
+// aContactP[0].innerHTML = aContactP[0].innerHTML.replace("Street", "Street<br>"); // horrible.
+aContactP[0].style.whiteSpace = "pre-line";
+aContactP[0].textContent = aContactP[0].textContent.replace("Street", "Street\n")
 
 // footer
 let footerPEl = document.querySelector("footer p");

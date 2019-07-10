@@ -76,3 +76,4 @@ function resetTimer()
 {
     tenS.textContent = 0, oneS.textContent = 0, hundMS.textContent = 0, tenMS.textContent = 0;
 }
+

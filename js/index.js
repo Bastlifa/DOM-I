@@ -142,6 +142,10 @@ function setPageHtml()
   navA = Array.from(navEl.children);
   navA.forEach(elem => elem.style.color = "green");
 
+
+  /******** something new for the repeat: ************/
+  //make the first paragraph under the image have red text, in an overly complicated way
+  document.querySelector(".middle-img + div").querySelector(":nth-last-child(3)").style.color = "red";
 }
 
 setPageHtml() //completes task 2, 3, stretch 1
@@ -171,6 +175,8 @@ function reverseEachString()
 
   //footer
   siteContent["footer"]["copyright"] = siteContent["footer"]["copyright"].split("").reverse().join("");
+
+  
 }
 
 //make the button work
